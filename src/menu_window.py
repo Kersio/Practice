@@ -41,7 +41,6 @@ class MenuWindow(QWidget):
         self.setLayout(vbox)
         self.setFixedSize(400, 280)
 
-        # Настройки окна
         self.setWindowTitle('Practice')
         self.show()
 
@@ -57,7 +56,7 @@ class MenuWindow(QWidget):
 
         # Проверка указанного пути на валидность
         if os.path.exists(filePath) and os.path.isfile(filePath):
-            pass
+            self.close()
         else:
             self.close()
             self.error_path_file()
@@ -76,28 +75,3 @@ class MenuWindow(QWidget):
 app = QApplication([])
 ex = MenuWindow()
 app.exec_()
-
-"""
-from PyQt5.QtWidgets import QApplication, QFileDialog
-
-
-def open_file_dialog():
-    app = QApplication([])
-    # Вызов диалога выбора файла
-    file_path = QFileDialog.getOpenFileName(
-        caption='Выберите изображение',
-        filter='PNG images (*.png)'
-    )
-
-    if file_path:
-        print(f'Выбран файл: {file_path}')
-    else:
-        print('Файл не выбран.')
-
-    return file_path
-
-
-# Вызов функции для открытия диалога выбора файла
-selected_file = open_file_dialog()
-print(selected_file)
-"""
