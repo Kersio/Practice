@@ -3,12 +3,12 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout,
 import sys
 
 
-class MainApp(QMainWindow):
-    def __init__(self):
+class MainWindow(QMainWindow):
+    def __init__(self, frame):
         super().__init__()
-        self.initUI()
+        self.initUI(frame)
 
-    def initUI(self):
+    def initUI(self, frame):
         # Основной виджет и макеты
         self.central_widget = QWidget()
         self.setCentralWidget(self.central_widget)
@@ -104,6 +104,3 @@ class MainApp(QMainWindow):
 
 
 # Запуск приложения
-app = QApplication(sys.argv)
-ex = MainApp()
-sys.exit(app.exec_())

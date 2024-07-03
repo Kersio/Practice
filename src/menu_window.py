@@ -1,8 +1,9 @@
 import os
 
+from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication, QFileDialog, QWidget, QPushButton, QVBoxLayout, QMessageBox
-
 import images
+import main_window
 
 
 class MenuWindow(QWidget):
@@ -46,19 +47,22 @@ class MenuWindow(QWidget):
 
     def camera(self):
         self.close()
-        images.get_camera_image(0)
+        frame = images.get_camera_image(0)
+        mainWindow = main_window.MainWindow(frame)
+        mainWindow.show()
 
     def file_image(self):
+        self.hide()
         filePath = QFileDialog.getOpenFileName(
-            self, caption= "Выбрать PNG файл",
+            self, caption="Выбрать PNG файл",
             directory="", filter="JPG Files (*.jpg);;PNG Files (*.png)"
         )[0]
-
         # Проверка указанного пути на валидность
         if os.path.exists(filePath) and os.path.isfile(filePath):
             self.close()
+            frame = images.get_file_image(filePath)
+            main_window.MainWindow(frame).show()
         else:
-            self.close()
             self.error_path_file()
 
     def error_path_file(self):
@@ -68,6 +72,7 @@ class MenuWindow(QWidget):
         msg.setInformativeText('Пожалуйста, выберите другой файл')
         msg.setWindowTitle("Ошибка")
         msg.exec_()  # Отображение диалогового окна с ошибкой
+        msg.raise_()
 
         self.show()
 
