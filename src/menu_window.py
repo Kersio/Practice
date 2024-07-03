@@ -1,6 +1,5 @@
 import os
 
-from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication, QFileDialog, QWidget, QPushButton, QVBoxLayout, QMessageBox
 import images
 import main_window
@@ -9,9 +8,9 @@ import main_window
 class MenuWindow(QWidget):
     def __init__(self):
         super().__init__()
-        self.initUI()
+        self.init_ui()
 
-    def initUI(self):
+    def init_ui(self):
 
         button_style = ("""
              QPushButton {
@@ -42,27 +41,31 @@ class MenuWindow(QWidget):
         self.setLayout(vbox)
         self.setFixedSize(400, 280)
 
-        self.setWindowTitle('Practice')
+        self.setWindowTitle('Выбор изображения')
         self.show()
 
     def camera(self):
         self.close()
-        frame = images.get_camera_image(0)
-        mainWindow = main_window.MainWindow(frame)
-        mainWindow.show()
-
+        if images.check_camera(0):
+            self.frame = images.get_camera_image(0)
+            self.mainWindow = main_window.MainWindow(self, self.frame)
+            self.mainWindow.show()
+        else:
+            self.hide()
+            self.error_camera()
     def file_image(self):
-        self.hide()
-        filePath = QFileDialog.getOpenFileName(
+        file_path = QFileDialog.getOpenFileName(
             self, caption="Выбрать PNG файл",
             directory="", filter="JPG Files (*.jpg);;PNG Files (*.png)"
         )[0]
         # Проверка указанного пути на валидность
-        if os.path.exists(filePath) and os.path.isfile(filePath):
+        if os.path.exists(file_path) and os.path.isfile(file_path):
             self.close()
-            frame = images.get_file_image(filePath)
-            main_window.MainWindow(frame).show()
+            self.frame = images.get_file_image(file_path)
+            self.mainWindow = main_window.MainWindow(self, self.frame)
+            self.mainWindow.show()
         else:
+            self.hide()
             self.error_path_file()
 
     def error_path_file(self):
@@ -70,6 +73,21 @@ class MenuWindow(QWidget):
         msg.setIcon(QMessageBox.Critical)
         msg.setText("Ошибка: выбранный файл невалиден")
         msg.setInformativeText('Пожалуйста, выберите другой файл')
+        msg.setWindowTitle("Ошибка")
+        msg.exec_()  # Отображение диалогового окна с ошибкой
+        msg.raise_()
+
+        self.show()
+
+    def error_camera(self):
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Critical)
+        msg.setText("Ошибка: нет подключенных веб-камер")
+        msg.setInformativeText('Можно решить проблему следующим образом:\n'
+                               '- проверить соединение кабеля камеры,\n'
+                               '- выбрать другой способ загрузки изображения,\n'
+                               '- проверить наличие драйверов '
+                               '(обновить их если они старые).')
         msg.setWindowTitle("Ошибка")
         msg.exec_()  # Отображение диалогового окна с ошибкой
         msg.raise_()
