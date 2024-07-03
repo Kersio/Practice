@@ -1,10 +1,9 @@
 import cv2
 import numpy
-import numpy as np
 
 
 # Получить изображение путем к файлу
-def get_file_image(path: str) -> np.ndarray:
+def get_file_image(path: str) -> numpy.ndarray:
     image = cv2.imread(path)
     if image is not (None):
         return image
@@ -71,4 +70,6 @@ def image_add_green_line(frame: numpy.ndarray, x1: int, y1: int, x2: int, y2: in
         thickness
     )
 
-#cv2.bitwise_not(frame) негативное изображение
+
+def negative_image(frame: numpy.ndarray) -> numpy.ndarray:
+    return cv2.bitwise_not(frame)
