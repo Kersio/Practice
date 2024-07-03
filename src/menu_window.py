@@ -12,17 +12,34 @@ class MenuWindow(QWidget):
 
     def initUI(self):
 
-        self.setFixedSize(400, 300)
+        button_style = ("""
+             QPushButton {
+                 background-color: #4CAF50; 
+                 border-style: solid;
+                 border-radius: 30px;  /* Половина высоты */
+                 border-width: 2px;
+                 border-color: #008080;
+                 font: bold 14px;
+                 min-width: 60px;
+                 min-height: 60px;  /* Делаем кнопку квадратной */
+             }
+             QPushButton:pressed {
+                 background-color: #66BB6A;
+             }
+         """)
 
         button1 = QPushButton('Получить изображение с веб-камеры', self)
         button2 = QPushButton('Выбрать изображение', self)
         button1.clicked.connect(self.camera)
         button2.clicked.connect(self.file_image)
+        button1.setStyleSheet(button_style)
+        button2.setStyleSheet(button_style)
 
         vbox = QVBoxLayout()
         vbox.addWidget(button1)
         vbox.addWidget(button2)
         self.setLayout(vbox)
+        self.setFixedSize(400, 280)
 
         # Настройки окна
         self.setWindowTitle('Practice')
