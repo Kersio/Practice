@@ -22,11 +22,11 @@
 
 ### Установка
 Первым делом необходимо склонировать репозиторий на ваш локальный репозиторий, сделать это можно с помощью git следующей командой:  
-'git clone https://github.com/Kersio/Practice'  
+`git clone https://github.com/Kersio/Practice`  
 Затем либо в консоли, либо, например, в менджере пакетов conda, необходимо перейти в каталог проекта командой:  
-'cd path'  
+`cd path`  
 где path - это путь до папки проекта.  
 Затем необходимо установить библиотеки и зависимости из requirements.txt следующей командой:  
-'pip install -r requirements.txt'  
+`pip install -r requirements.txt`  
 и запустить приложение командой:  
-'python .\src\main.py'  
+`python .\src\main.py`  
