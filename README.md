@@ -30,3 +30,33 @@
 <pip install -r requirements.txt>
 и запустить приложение командой:
 <python .\src\main.py>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+![Gon Confused](https://tenor.com/ru/view/gon-gon-confused-gon-freecss-gon-freecss-confused-hxh-gif-795535026193237901
+
+
+
+
+
+
+<p align="center">
+  <img src="https://media1.tenor.com/m/bmcU6fpKS4YAAAAd/gon-gon-confused.gif" alt="описание">
+</p>
