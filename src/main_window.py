@@ -103,7 +103,6 @@ class MainWindow(QMainWindow):
         self.right_layout.addWidget(self.open_window_button)
         self.open_window_button.setStyleSheet(button_style)
 
-        # Место для изображения OpenCV
         self.image_label = QLabel(self)
         self.image_label.setPixmap(QPixmap('./res/start_image.jpg'))
         self.image_label.setMaximumSize(1440, 810)
@@ -155,6 +154,19 @@ class MainWindow(QMainWindow):
 
 
 class BorderDialog(QDialog):
+    """
+    Диалоговое окно для ввода значений границ изображения и их применения.
+
+    Методы:
+    - __init__: Конструктор класса.
+    - init_ui: Инициализация пользовательского интерфейса.
+    - save_values: Сохранение введенных значений и проверка их корректности.
+    - image_add_border: Добавление границ к изображению.
+    - error_input: Отображение сообщения об ошибке при некорректном вводе данных.
+
+    :param prev_window: Ссылка на предыдущее окно (родительское).
+    :param frame: Изображение, к которому будут добавлены границы.
+    """
     def __init__(self, prev_window, frame):
         super().__init__()
         self.prev_window = prev_window
@@ -261,6 +273,19 @@ class BorderDialog(QDialog):
 
 
 class LineDialog(QWidget):
+    """
+    Диалоговое окно для ввода параметров линии и её отрисовки на изображении.
+
+    Методы:
+    - __init__: Конструктор класса.
+    - init_ui: Инициализация пользовательского интерфейса.
+    - saveData: Сохранение данных и отрисовка линии.
+    - error_input: Отображение сообщения об ошибке.
+    - draw_line: Отрисовка линии на изображении.
+
+    :param prev_window: Ссылка на предыдущее окно (родительское).
+    :param frame: Изображение, на котором будет отрисована линия.
+    """
     def __init__(self, prev_window, frame):
         super().__init__()
         self.prev_window = prev_window
