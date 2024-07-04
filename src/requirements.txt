@@ -1,0 +1,5 @@
+numpy==1.21.6
+opencv-python==4.10.0.84
+PyQt5==5.13.1
+PyQt5-sip==12.7.0
+wincertstore==0.2
