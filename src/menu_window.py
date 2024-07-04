@@ -1,11 +1,24 @@
 import os
 
-from PyQt5.QtWidgets import QApplication, QFileDialog, QWidget, QPushButton, QVBoxLayout, QMessageBox
+from PyQt5.QtWidgets import QFileDialog, QWidget, QPushButton, QVBoxLayout, QMessageBox
 import images
 import main_window
 
 
 class MenuWindow(QWidget):
+    """
+        Окно-меню приложения, предназначено для выбора изображений.
+
+        Пользователь может выбрать изображение с веб-камеры или из файла на компьютере.
+        После выбора откроется главное окно приложения для обработки изображения.
+
+        Методы:
+            init_ui(): Инициализирует пользовательский интерфейс окна меню.
+            camera(): Запускает процесс получения изображения с веб-камеры.
+            file_image(): Открывает диалоговое окно для выбора изображения из файла.
+            error_path_file(): Отображает сообщение об ошибке, если файл не найден или невалиден.
+            error_camera(): Отображает сообщение об ошибке, если веб-камера не подключена или не работает.
+        """
     def __init__(self):
         super().__init__()
         self.init_ui()
@@ -93,8 +106,3 @@ class MenuWindow(QWidget):
         msg.raise_()
 
         self.show()
-
-
-app = QApplication([])
-ex = MenuWindow()
-app.exec_()

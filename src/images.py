@@ -13,8 +13,11 @@ def get_file_image(path: str) -> numpy.ndarray:
 
 # Проверка доступности камеры по индексу
 def check_camera(index: int) -> bool:
-    cap = cv2.VideoCapture(index)
-    if cap is None or not cap.isOpened():
+    try:
+        cap = cv2.VideoCapture(index)
+        if cap is None or not cap.isOpened():
+            raise
+    except :
         return False
     cap.release()
     return True
@@ -63,7 +66,7 @@ def negative_image(frame: numpy.ndarray) -> numpy.ndarray:
 
 
 def convert_image_to_jpg(frame):
-    cv2.imwrite('output_image.jpg', frame)
+    cv2.imwrite('./res/output_image.jpg', frame)
 
 
 def image_channel(frame, color):

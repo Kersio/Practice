@@ -6,7 +6,28 @@ import images
 
 
 class MainWindow(QMainWindow):
+    """
+    Главное окно приложения, предназначено для обработки изображений.
+
+    Методы:
+        init_ui(): Инициализирует пользовательский интерфейс.
+        on_button1_clicked(): Обработчик события для кнопки "Показать изображение".
+        on_button2_clicked(): Обработчик события для кнопки "Показать красный канал изображения".
+        on_button3_clicked(): Обработчик события для кнопки "Показать зеленый канал изображения".
+        on_button4_clicked(): Обработчик события для кнопки "Показать синий канал изображения".
+        on_button5_clicked(): Обработчик события для кнопки "Показать негативное изображение".
+        on_button6_clicked(): Обработчик события для кнопки "Добавить границы к изображению".
+        on_button7_clicked(): Обработчик события для кнопки "Нарисовать зеленую линию на изображении".
+        open_menu_window(): Открывает предыдущее окно выбора изображения.
+    """
     def __init__(self, prev_window, frame):
+        """
+            Конструктор класса MainWindow.
+
+            Параметры:
+                prev_window (MenuWindow): Ссылка на предыдущее окно.
+                frame (QPixmap): Изображение для обработки и отображения.
+        """
         super().__init__()
         self.init_ui()
         self.frame = frame
@@ -84,7 +105,7 @@ class MainWindow(QMainWindow):
 
         # Место для изображения OpenCV
         self.image_label = QLabel(self)
-        self.image_label.setPixmap(QPixmap('Picture2.jpg'))
+        self.image_label.setPixmap(QPixmap('./res/start_image.jpg'))
         self.image_label.setMaximumSize(1440, 810)
         self.right_layout.addWidget(self.image_label)
 
@@ -100,23 +121,23 @@ class MainWindow(QMainWindow):
     # Обработчики событий для кнопок
     def on_button1_clicked(self):
         images.convert_image_to_jpg(self.frame)
-        self.image_label.setPixmap(QPixmap("output_image.jpg"))
+        self.image_label.setPixmap(QPixmap("./res/output_image.jpg"))
 
     def on_button2_clicked(self):
         images.convert_image_to_jpg(images.image_channel(self.frame, "R"))
-        self.image_label.setPixmap(QPixmap("output_image.jpg"))
+        self.image_label.setPixmap(QPixmap("./res/output_image.jpg"))
 
     def on_button3_clicked(self):
         images.convert_image_to_jpg(images.image_channel(self.frame, "G"))
-        self.image_label.setPixmap(QPixmap("output_image.jpg"))
+        self.image_label.setPixmap(QPixmap("./res/output_image.jpg"))
 
     def on_button4_clicked(self):
         images.convert_image_to_jpg(images.image_channel(self.frame, "B"))
-        self.image_label.setPixmap(QPixmap("output_image.jpg"))
+        self.image_label.setPixmap(QPixmap("./res/output_image.jpg"))
 
     def on_button5_clicked(self):
         images.convert_image_to_jpg(images.negative_image(self.frame))
-        self.image_label.setPixmap(QPixmap("output_image.jpg"))
+        self.image_label.setPixmap(QPixmap("./res/output_image.jpg"))
 
     def on_button6_clicked(self):
         self.dialog_border = BorderDialog(self, self.frame)
@@ -224,7 +245,7 @@ class BorderDialog(QDialog):
             )
         )
         self.close()
-        self.prev_window.image_label.setPixmap(QPixmap("output_image.jpg"))
+        self.prev_window.image_label.setPixmap(QPixmap("./res/output_image.jpg"))
         self.prev_window.show()
 
     def error_input(self):
@@ -370,5 +391,5 @@ class LineDialog(QWidget):
             )
         )
         self.close()
-        self.prev_window.image_label.setPixmap(QPixmap("output_image.jpg"))
+        self.prev_window.image_label.setPixmap(QPixmap("./res/output_image.jpg"))
         self.prev_window.show()
